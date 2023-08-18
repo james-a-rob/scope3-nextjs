@@ -1,6 +1,9 @@
 'use client';
 import * as React from 'react';
 import moment from 'moment';
+import { createTheme, ThemeProvider, styled, ThemeOptions } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -25,13 +28,26 @@ import {
   randomId,
 } from '@mui/x-data-grid-generator';
 
-const roles = ['Banner', 'Video', 'Text'];
+
+export const themeOptions: ThemeOptions = {
+  palette: {
+    primary: {
+      main: '#0d3b00',
+    },
+    secondary: {
+      main: '#dffc02',
+    },
+  },
+};
+
+const theme = createTheme(themeOptions);
+
 
 const initialRows: GridRowsProp = [
 
 ];
 
-interface CreativeEmissionsData  {
+interface CreativeEmissionsData {
   consumerDeviceEmissions: number;
   creativeConsumerDeviceEmissions: number;
   creativeDistributionEmissions: number;
@@ -219,33 +235,43 @@ export default function FullFeaturedCrudGrid() {
   ];
 
   return (
-    <Box
-      sx={{
-        height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-      }}
-    >
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
-      />
-    </Box>
+    <ThemeProvider theme={theme}>
+
+      <div>
+        <AppBar position="static" >
+          <Toolbar>
+            Scope3 NextJS
+          </Toolbar>
+        </AppBar>
+        <Box
+          sx={{
+            height: 500,
+            width: '100%',
+            '& .actions': {
+              color: 'text.secondary',
+            },
+            '& .textPrimary': {
+              color: 'text.primary',
+            },
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            editMode="row"
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
+            slots={{
+              toolbar: EditToolbar,
+            }}
+            slotProps={{
+              toolbar: { setRows, setRowModesModel },
+            }}
+          />
+        </Box>
+      </div>
+    </ThemeProvider>
   );
 }
