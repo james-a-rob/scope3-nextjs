@@ -29,7 +29,7 @@ import {
 } from '@mui/x-data-grid-generator';
 
 
-export const themeOptions: ThemeOptions = {
+const themeOptions: ThemeOptions = {
   palette: {
     primary: {
       main: '#0d3b00',
