@@ -172,6 +172,7 @@ export default function FullFeaturedCrudGrid() {
         if (isInEditMode) {
           return [
             <GridActionsCellItem
+              key="1"
               icon={<SaveIcon />}
               label="Save"
               sx={{
@@ -180,6 +181,8 @@ export default function FullFeaturedCrudGrid() {
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
+              key="2"
+
               icon={<CancelIcon />}
               label="Cancel"
               className="textPrimary"
@@ -191,6 +194,8 @@ export default function FullFeaturedCrudGrid() {
 
         return [
           <GridActionsCellItem
+            key="1"
+
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
@@ -198,6 +203,8 @@ export default function FullFeaturedCrudGrid() {
             color="inherit"
           />,
           <GridActionsCellItem
+            key="2"
+
             icon={<DeleteIcon />}
             label="Delete"
             onClick={handleDeleteClick(id)}

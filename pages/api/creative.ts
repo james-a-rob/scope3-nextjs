@@ -2,10 +2,11 @@ import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
   const data = {
     "format": req.query.format,
     "date": req.query.date,
-    "impressions": parseInt(req.query.impressions),
+    "impressions": parseInt(req.query.impressions as string),
     "country": req.query.country
   }
   console.log(data)
