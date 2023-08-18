@@ -1,6 +1,19 @@
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+interface CreativeEmissionsResponse {
+  data: CreativeEmissionsData;
+}
+
+interface CreativeEmissionsData  {
+  consumerDeviceEmissions: number;
+  creativeConsumerDeviceEmissions: number;
+  creativeDistributionEmissions: number;
+  dataTransferEmissions: number;
+  totalEmissions: number;
+}
+
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const data = {
@@ -12,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log(data)
 
   try{
-    const emissionsData = await axios.post(
+    const emissionsData: CreativeEmissionsResponse = await axios.post(
       "https://api.scope3.com/v1/creative",
       data,
       {
@@ -28,9 +41,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   }catch(e){
     console.log(e)
+    res.status(500).json({message:'did not work'})
+
   }
 
-  res.status(500).json({message:'did not work'})
 
 
 }

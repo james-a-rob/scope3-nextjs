@@ -22,20 +22,23 @@ import {
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
 import {
-  randomCreatedDate,
-  randomTraderName,
   randomId,
-  randomArrayItem,
 } from '@mui/x-data-grid-generator';
 
 const roles = ['Banner', 'Video', 'Text'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
 
 const initialRows: GridRowsProp = [
 
 ];
+
+interface CreativeEmissionsData  {
+  consumerDeviceEmissions: number;
+  creativeConsumerDeviceEmissions: number;
+  creativeDistributionEmissions: number;
+  dataTransferEmissions: number;
+  totalEmissions: number;
+}
+
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
@@ -44,7 +47,7 @@ interface EditToolbarProps {
   ) => void;
 }
 
-async function getEmissionsData(format: string, date: string, country: String, impressions: number) {
+async function getEmissionsData(format: string, date: string, country: String, impressions: number): Promise<CreativeEmissionsData> {
   // mapping from get to post request is creative extra work. Use post request on client to match scope3 API?
   const response = await fetch(`/api/creative?format=${format}&date=${date}&impressions=${impressions}&country=${country}`);
   const emissions = await response.json();
