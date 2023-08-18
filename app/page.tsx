@@ -240,7 +240,7 @@ export default function FullFeaturedCrudGrid() {
       <div>
         <AppBar position="static" >
           <Toolbar>
-            Scope3 NextJS
+            Scope3 NextJS Sample
           </Toolbar>
         </AppBar>
         <Box
